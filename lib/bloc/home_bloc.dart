@@ -10,7 +10,6 @@ class HomeBloc extends BaseBloc{
   HomeScreenRepo _repo = HomeScreenRepo();
   StreamController<Response> streamController = StreamController();
 
-
    getAllImage(BuildContext context,int count) async {
     if (await isConnectedToInternet()) {
       Response response = await _repo.getImage(count);

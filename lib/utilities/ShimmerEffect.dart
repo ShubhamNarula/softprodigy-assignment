@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -18,8 +17,7 @@ class _ShimmerEffectState extends State<ShimmerEffect> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+        width: ClassMediaQuery.screenWidth,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
@@ -34,7 +32,9 @@ class _ShimmerEffectState extends State<ShimmerEffect> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
+                        SizedBox(height: 15,),
                         carouselView(),
+                        SizedBox(height: 15,),
                         imgShowInGrid()
                       ],
                     ),
@@ -50,20 +50,31 @@ class _ShimmerEffectState extends State<ShimmerEffect> {
     );
   }
   Widget carouselView(){
+    return Row(
+      children: [
+        Container(
+          width: ClassMediaQuery.blockSizeHorizontal*12,
+          height: 220,
+          color: Colors.white,
 
-    return Container(
-      height: 250,
-      child: ListView(
-        children: [
-          Container(
-            width: ClassMediaQuery.screenWidth,
-            height: 200,
-            color: Colors.white,
-          ),
-        ],
-      ),
+        ),
+        SizedBox(width: ClassMediaQuery.blockSizeHorizontal*10 ,),
+        Container(
+          width: ClassMediaQuery.blockSizeHorizontal*54,
+          height: 250,
+          color: Colors.white,
 
+        ),
+        SizedBox(width: ClassMediaQuery.blockSizeHorizontal*10 ,),
+        Container(
+          width: ClassMediaQuery.blockSizeHorizontal*12,
+          height: 220,
+          color: Colors.white,
+
+        ),
+      ],
     );
+
   }
 
   Widget imgShowInGrid() {

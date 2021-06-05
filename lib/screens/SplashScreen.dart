@@ -18,7 +18,6 @@ import 'package:soft_prodigy_assignment/utilities/router_constants.dart';
    @override
    void initState() {
      super.initState();
-
      Timer(Duration(seconds: 2),
              ()=>
              _navigationService.navigateWithRemovingAllPrevious(DASHBOARD_SCREEN)

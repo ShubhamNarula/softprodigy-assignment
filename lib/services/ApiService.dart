@@ -17,12 +17,6 @@ class ApiService {
     return map;
   }
 
-
-
-  ApiService(String token) {
-    _userHeader['accessToken'] = token;
-  }
-
   static hit({
     required Uri url,
     dynamic body,
