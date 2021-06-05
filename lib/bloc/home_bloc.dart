@@ -9,16 +9,17 @@ import 'package:soft_prodigy_assignment/utilities/utility.dart';
 class HomeBloc extends BaseBloc{
   HomeScreenRepo _repo = HomeScreenRepo();
   StreamController<Response> streamController = StreamController();
-//If the method intentionally returns null at the end,
-// then change the return type so that it’s valid to return null:
-  Future<Response> getAllImage(BuildContext context) async {
+
+
+   getAllImage(BuildContext context,int count) async {
     if (await isConnectedToInternet()) {
-      Response response = await _repo.getImage();
-      streamController.add(response);
-    } else {
-      hideLoader(context);
+      Response response = await _repo.getImage(count);
+      //timer is used to show shimmer animation to little longer
+      Timer(Duration(seconds: 2),
+              ()=>
+                  streamController.add(response)
+      );
     }
-    throw '';
   }
 
   @override

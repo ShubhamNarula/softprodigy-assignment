@@ -12,23 +12,18 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-final List<String> imgList = [];
-
 class _HomeScreenState extends State<HomeScreen> {
   CarouselController _controller = CarouselController();
   HomeBloc request = HomeBloc();
-  bool isGetAllImage = false;
-  late Animation<Color> first;
-  late Animation<Color> second;
+
   @override
   Widget build(BuildContext context) {
-    request.getAllImage(context);
+    request.getAllImage(context, 20);
     return Scaffold(
       body: StreamBuilder(
         stream: request.streamController.stream,
         builder: (BuildContext context, AsyncSnapshot<Response> snapshot) {
           if (snapshot.hasData) {
-            imgList.addAll(snapshot.requireData.images);
             return root(snapshot.requireData);
           } else {
             return Container(child: ShimmerEffect());
@@ -36,46 +31,46 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
     );
-
   }
 
-  Widget root(Response data){
+  Widget root(Response data) {
     return SingleChildScrollView(
-        child: Column(
-          children: [
-            carouselView(data),
-            SizedBox(height: 40,),
-            imgShowInGrid()
-          ],
-        ),
-      );
+      child: Column(
+        children: [
+          carouselView(data),
+          SizedBox(
+            height: 40,
+          ),
+          imgShowInGrid(data.images)
+        ],
+      ),
+    );
   }
 
-
-  Widget carouselView(Response data){
+  Widget carouselView(Response data) {
     return Container(
       height: 250,
       child: ListView(
         children: [
           CarouselSlider(
-              carouselController: _controller,
-              items: imageSliders,
-              //Slider Container properties
-              options: CarouselOptions(
-                enlargeCenterPage: true,
-                height: 250,
-              )),
+            carouselController: _controller,
+            items: listCarousel(data),
+            //Slider Container properties
+            options: CarouselOptions(
+              enlargeCenterPage: true,
+              height: 250,
+            ),
+          ),
         ],
       ),
-
     );
   }
 
-  Widget imgShowInGrid() {
+  Widget imgShowInGrid(List<String> listOfImage) {
     return GridView.builder(
       shrinkWrap: true,
       primary: false,
-      itemCount: imgList.length,
+      itemCount: listOfImage.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 1,
@@ -92,13 +87,12 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Expanded(
                 child: Image.network(
-                  imgList[index],
+                  listOfImage[index],
                   fit: BoxFit.cover,
                   width: double.infinity,
                   height: double.infinity,
                 ),
               ),
-
             ],
           ),
         );
@@ -106,42 +100,30 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  final List<Widget> imageSliders = imgList
-      .map((item) => Container(
-            child: Container(
-              margin: EdgeInsets.all(5.0),
-              child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  child: Stack(
-                    children: <Widget>[
-                      Image.network(
-                        item,
-                        width: 1000,
-                        height: 450,
-                      ),
-                      // Image.network(item, fit: BoxFit.cover, width: 1000.0),
-                      Positioned(
-                        bottom: 0.0,
-                        left: 0.0,
-                        right: 0.0,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Color.fromARGB(200, 0, 0, 0),
-                                Color.fromARGB(0, 0, 0, 0)
-                              ],
-                              begin: Alignment.bottomCenter,
-                              end: Alignment.topCenter,
-                            ),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 20.0),
-                        ),
-                      ),
-                    ],
-                  )),
+  List<Widget> listCarousel(Response events) {
+    List<Widget> list = [];
+    for (int i = 0; i < 5; i++) {
+      list.add(carousel(events.images[i]));
+    }
+    return list;
+  }
+
+  Widget carousel(String image) {
+    return Container(
+      height: 250,
+      alignment: Alignment.center,
+      margin: EdgeInsets.all(5.0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+        child: Stack(
+          children: <Widget>[
+            Image.network(
+              image,
+              fit: BoxFit.cover,
             ),
-          ))
-      .toList();
+          ],
+        ),
+      ),
+    );
+  }
 }

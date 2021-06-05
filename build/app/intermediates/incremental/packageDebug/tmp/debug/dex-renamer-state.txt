@@ -1,4 +1,0 @@
-#Sat Jun 05 11:53:42 IST 2021
-base.0=/Users/shubhamnarula/Desktop/FlutterProjects/soft_prodigy_assignment/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
-renamed.0=classes.dex
-path.0=classes.dex

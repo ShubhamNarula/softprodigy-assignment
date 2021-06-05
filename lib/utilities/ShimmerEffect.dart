@@ -31,45 +31,11 @@ class _ShimmerEffectState extends State<ShimmerEffect> {
                 child: ListView.builder(
                   itemBuilder: (_, __) => Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
-                    child: Row(
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Container(
-                          width: 48.0,
-                          height: 48.0,
-                          color: Colors.white,
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8.0),
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Container(
-                                width: double.infinity,
-                                height: 8.0,
-                                color: Colors.white,
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 2.0),
-                              ),
-                              Container(
-                                width: double.infinity,
-                                height: 8.0,
-                                color: Colors.white,
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 2.0),
-                              ),
-                              Container(
-                                width: 40.0,
-                                height: 8.0,
-                                color: Colors.white,
-                              ),
-                            ],
-                          ),
-                        )
+                        carouselView(),
+                        imgShowInGrid()
                       ],
                     ),
                   ),
@@ -90,8 +56,10 @@ class _ShimmerEffectState extends State<ShimmerEffect> {
       child: ListView(
         children: [
           Container(
-
-          )
+            width: ClassMediaQuery.screenWidth,
+            height: 200,
+            color: Colors.white,
+          ),
         ],
       ),
 
@@ -119,8 +87,10 @@ class _ShimmerEffectState extends State<ShimmerEffect> {
             children: [
               Expanded(
                 child: Container(
-                  width: double.infinity,
-                  height: double.infinity,
+                  width: 200,
+                  height: 200,
+                  color: Colors.white,
+
                 ),
               ),
 

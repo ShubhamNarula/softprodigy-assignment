@@ -12,8 +12,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
-    Text('Search Page', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
-    Text('Profile Page', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+    Text('Messages', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
   ];
 
   void _onItemTapped(int index) {
@@ -36,19 +35,15 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
                 icon: Icon(Icons.home),
-                title: Text('Home'),
+                label: 'Home',
                 backgroundColor: Colors.green
             ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.search),
-                title: Text('Search'),
+                icon: Icon(Icons.message),
+                label: 'Messages',
                 backgroundColor: Colors.green
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              title: Text('Profile'),
-              backgroundColor: Colors.green,
-            ),
+
           ],
           type: BottomNavigationBarType.shifting,
           currentIndex: _selectedIndex,
