@@ -50,18 +50,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget carouselView(Response data) {
     return Container(
       height: 250,
-      child: ListView(
-        children: [
-          CarouselSlider(
-            carouselController: _controller,
-            items: listCarousel(data),
-            //Slider Container properties
-            options: CarouselOptions(
-              enlargeCenterPage: true,
-              height: 250,
-            ),
-          ),
-        ],
+      child: CarouselSlider(
+        carouselController: _controller,
+        items: listCarousel(data),
+        //Slider Container properties
+        options: CarouselOptions(
+          enlargeCenterPage: true,
+          height: 250,
+        ),
       ),
     );
   }
